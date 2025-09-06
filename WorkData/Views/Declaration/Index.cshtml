@@ -1,0 +1,144 @@
+﻿@using WorkData.Data.GenericModels
+@model List<IGrouping<MonthYearGroup, Declaration>>
+@{
+    var now = DateTime.Now;
+    var currentIndex = Model.FindIndex(g => g.Key.Year == now.Year && g.Key.Month == now.Month);
+
+    if (currentIndex > 0) // trovato, ma non è già il primo
+    {
+        var current = Model[currentIndex];
+        Model.RemoveAt(currentIndex);
+        Model.Insert(0, current);
+    }
+
+    // ora il tab corrente è in prima posizione
+    var activeIndex = 0;
+}
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col">
+            <h2 class="text-secondary">
+                Declaration List
+            </h2>
+        </div>
+        <div class="col col-lg-2">
+
+            <form asp-controller="Declaration" asp-action="FastCreate" method="post">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-stopwatch"></i> Fast Declaration
+                </button>
+            </form>
+        </div>
+        <div class="col col-lg-2">
+            <a asp-controller="Declaration" asp-action="Create" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Add Declaration
+            </a>
+        </div>
+    </div>
+</div>
+
+@if (Model != null && Model.Any())
+{
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var group = Model[i];
+            var tabId = $"tab-{i}";
+            <li class="nav-item" role="presentation">
+                <button class="nav-link @(i == activeIndex ? "active" : "")"
+                        id="@tabId-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#@tabId"
+                        type="button" role="tab"
+                        aria-controls="@tabId"
+                        aria-selected="@(i == 0 ? "true" : "false")">
+                    @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(group.Key.Month) @group.Key.Year
+                </button>
+            </li>
+        }
+    </ul>
+    <div class="tab-content mt-3" id="myTabContent">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var group = Model[i];
+            var tabId = $"tab-{i}";
+            <div class="tab-pane fade @(i == activeIndex ? "show active" : "")" id="@tabId" role="tabpanel" aria-labelledby="@tabId-tab">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="bg-secondary">Declaration Date</th>
+                            <th class="bg-secondary">Ordinal Hours</th>
+                            <th class="bg-secondary">Extra Hours</th>
+                            <th class="bg-secondary">Sick Hours</th>
+                            <th class="bg-secondary">Holiday Hours</th>
+                            <th class="bg-secondary">Permission Hours</th>
+                            <th class="bg-secondary"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var obj in group.OrderBy(u => u.Date))
+                        {
+                            <tr>
+                                <td>@obj.Date.ToString("dd/MM/yyyy")</td>
+                                <td>@obj.OrdinalHours</td>
+                                <td>@obj.ExtraHours</td>
+                                <td>@obj.SickHours</td>
+                                <td>@obj.HolidayHours</td>
+                                <td>@obj.PermissionHours</td>
+                                <td>
+                                    <div class="btn-group">
+                                        @* <a asp-controller="Declaration" asp-action="Edit" asp-route-Id="@obj.Id" class="btn btn-secondary p-2 ">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a> *@
+                                        <form asp-controller="Declaration" asp-action="Edit" asp-route-Id="@obj.Id" method="get">
+                                            <button type="submit" class="btn btn-secondary mx-lg-2">
+                                                <i class="bi bi-pencil-square"></i> Edit
+                                            </button>
+                                        </form>
+                                        <form asp-controller="Declaration" asp-action="Delete" asp-route-Id="@obj.Id" method="post" >
+                                            <button type="submit" class="btn btn-danger mx-lg-2">
+                                                <i class="bi bi-trash-fill"></i> Remove
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="">
+                        <tr class="fw-bold bg-success">
+                            <td class="bg-secondary col-3">Month total</td>
+                            
+                            <td class="bg-secondary">@group.Sum(x => x.OrdinalHours)</td>
+                            <td class="bg-secondary">@group.Sum(x => x.ExtraHours)</td>
+                            <td class="bg-secondary">@group.Sum(x => x.SickHours)</td>
+                            <td class="bg-secondary">@group.Sum(x => x.HolidayHours)</td>
+                            <td class="bg-secondary">@group.Sum(x => x.PermissionHours)</td>
+                            <td class="bg-secondary">@group.Sum(x => x.OrdinalHours + x.ExtraHours+x.SickHours+x.HolidayHours+x.PermissionHours)</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Declaration Date</th>
+                <th>Ordinal Hours</th>
+                <th>Extra Hours</th>
+                <th>Sick Hours</th>
+                <th>Holiday Hours</th>
+                <th>Permission Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4">No declarations found.</td>
+            </tr>
+        </tbody>
+    </table>
+}
