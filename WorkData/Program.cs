@@ -8,7 +8,13 @@ var culture = new System.Globalization.CultureInfo("it-IT");
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSqlite<AppDbContext>(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+//Add Identity
+builder.Services.AddDefaultIdentity<SampleUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<AppDbContext>();
+
 builder.Services.AddScoped<IDeclarationValidator, DeclarationValidator>();
+
 
 var app = builder.Build();
 
@@ -31,11 +37,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapRazorPages();
 app.Run();

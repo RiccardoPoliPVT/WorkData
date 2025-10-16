@@ -27,7 +27,8 @@ namespace WorkData.Repository
                 modelState.AddModelError("Date", "Cannot insert date: " + d.Date + " cause it already exists.\n\r Update the existing one ");
             }
 
-            if(d.ExtraHours == 0 && d.OrdinalHours == 0 && d.SickHours == 0 && d.HolidayHours == 0 && d.PermissionHours  == 0)
+            // Non si possono inserire 0 ore in tutto 
+            if (d.ExtraHours == 0 && d.OrdinalHours == 0 && d.SickHours == 0 && d.HolidayHours == 0 && d.PermissionHours == 0)
             {
                 modelState.AddModelError("", "Ordinal hours must be more then 1");
             }
@@ -37,6 +38,12 @@ namespace WorkData.Repository
             if (regularHours > 8)
             {
                 modelState.AddModelError("", "Cannot insert more then 8 hours as 'Regular' hours (Ordinal/Sick/Holiday/Permission)");
+            }
+
+            //Il totale delle ore giornaliere non può essere > 24
+            if(regularHours+d.ExtraHours > 24)
+            {
+                modelState.AddModelError("","Total hours of the day cannot be over 24 hours");
             }
         }
     }

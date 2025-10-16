@@ -1,0 +1,98 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ricca\\OneDrive\\Desktop\\Code Project\\WorkData\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A6C0C108-D268-4D1C-8FFD-8F8E7A3CCA5B}|WorkData\\WorkData.csproj|c:\\users\\ricca\\onedrive\\desktop\\code project\\workdata\\workdata\\controllers\\declarationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6C0C108-D268-4D1C-8FFD-8F8E7A3CCA5B}|WorkData\\WorkData.csproj|solutionrelative:workdata\\controllers\\declarationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6C0C108-D268-4D1C-8FFD-8F8E7A3CCA5B}|WorkData\\WorkData.csproj|c:\\users\\ricca\\onedrive\\desktop\\code project\\workdata\\workdata\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A6C0C108-D268-4D1C-8FFD-8F8E7A3CCA5B}|WorkData\\WorkData.csproj|solutionrelative:workdata\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6C0C108-D268-4D1C-8FFD-8F8E7A3CCA5B}|WorkData\\WorkData.csproj|c:\\users\\ricca\\onedrive\\desktop\\code project\\workdata\\workdata\\views\\declaration\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A6C0C108-D268-4D1C-8FFD-8F8E7A3CCA5B}|WorkData\\WorkData.csproj|solutionrelative:workdata\\views\\declaration\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A6C0C108-D268-4D1C-8FFD-8F8E7A3CCA5B}|WorkData\\WorkData.csproj|c:\\users\\ricca\\onedrive\\desktop\\code project\\workdata\\workdata\\data\\genericmodels\\weeks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A6C0C108-D268-4D1C-8FFD-8F8E7A3CCA5B}|WorkData\\WorkData.csproj|solutionrelative:workdata\\data\\genericmodels\\weeks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0174dea2-fdbe-4ef1-8f99-c0beae78880f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ricca\\OneDrive\\Desktop\\Code Project\\WorkData\\WorkData\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "WorkData\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\ricca\\OneDrive\\Desktop\\Code Project\\WorkData\\WorkData\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "WorkData\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAgwC0AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-11T19:27:05.75Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ricca\\OneDrive\\Desktop\\Code Project\\WorkData\\WorkData\\Views\\Declaration\\Index.cshtml",
+              "RelativeDocumentMoniker": "WorkData\\Views\\Declaration\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ricca\\OneDrive\\Desktop\\Code Project\\WorkData\\WorkData\\Views\\Declaration\\Index.cshtml",
+              "RelativeToolTip": "WorkData\\Views\\Declaration\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-10T18:54:25.488Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Weeks.cs",
+              "DocumentMoniker": "C:\\Users\\ricca\\OneDrive\\Desktop\\Code Project\\WorkData\\WorkData\\Data\\GenericModels\\Weeks.cs",
+              "RelativeDocumentMoniker": "WorkData\\Data\\GenericModels\\Weeks.cs",
+              "ToolTip": "C:\\Users\\ricca\\OneDrive\\Desktop\\Code Project\\WorkData\\WorkData\\Data\\GenericModels\\Weeks.cs",
+              "RelativeToolTip": "WorkData\\Data\\GenericModels\\Weeks.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T18:29:59.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DeclarationController.cs",
+              "DocumentMoniker": "C:\\Users\\ricca\\OneDrive\\Desktop\\Code Project\\WorkData\\WorkData\\Controllers\\DeclarationController.cs",
+              "RelativeDocumentMoniker": "WorkData\\Controllers\\DeclarationController.cs",
+              "ToolTip": "C:\\Users\\ricca\\OneDrive\\Desktop\\Code Project\\WorkData\\WorkData\\Controllers\\DeclarationController.cs",
+              "RelativeToolTip": "WorkData\\Controllers\\DeclarationController.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAQwHAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T18:19:09.169Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

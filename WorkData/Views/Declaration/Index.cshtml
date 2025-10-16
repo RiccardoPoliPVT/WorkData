@@ -14,24 +14,31 @@
     // ora il tab corrente è in prima posizione
     var activeIndex = 0;
 }
-<div class="container">
+<div class="container-fluid">
     <div class="row pt-4 pb-3">
-        <div class="col">
+        <div class="col-sm-12 col-md-auto">
             <h2 class="text-secondary">
-                Declaration List
+                Lista Timbrature
             </h2>
         </div>
-        <div class="col col-lg-2">
 
+        <div class="col col-lg-2 ms-md-auto">
             <form asp-controller="Declaration" asp-action="FastCreate" method="post">
                 <button type="submit" class="btn btn-success">
-                    <i class="bi bi-stopwatch"></i> Fast Declaration
+                    <i class="bi bi-stopwatch"></i> Timbratura veloce
                 </button>
             </form>
         </div>
         <div class="col col-lg-2">
+            @* <form asp-controller="Declaration" asp-action="WeekCreate" method="post"> *@
+            <button type="submit" id="open-popup-btn" class="btn btn-success d-flex align-items-center">
+                <span class="material-symbols-outlined me-2">calendar_add_on</span> Carica Settimana
+            </button>
+            @* </form> *@
+        </div>
+        <div class="col col-lg-2 m-0">
             <a asp-controller="Declaration" asp-action="Create" class="btn btn-success">
-                <i class="bi bi-plus-circle"></i> Add Declaration
+                <i class="bi bi-plus-circle"></i> Aggiungi giornata
             </a>
         </div>
     </div>
@@ -63,61 +70,80 @@
             var group = Model[i];
             var tabId = $"tab-{i}";
             <div class="tab-pane fade @(i == activeIndex ? "show active" : "")" id="@tabId" role="tabpanel" aria-labelledby="@tabId-tab">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th class="bg-secondary">Declaration Date</th>
-                            <th class="bg-secondary">Ordinal Hours</th>
-                            <th class="bg-secondary">Extra Hours</th>
-                            <th class="bg-secondary">Sick Hours</th>
-                            <th class="bg-secondary">Holiday Hours</th>
-                            <th class="bg-secondary">Permission Hours</th>
-                            <th class="bg-secondary"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var obj in group.OrderBy(u => u.Date))
-                        {
+                <div class="table-responsive" style="max-height: 60vh; overflow-y: auto;">
+                    
+                    
+                    <table class="table table-bordered table-striped">
+                        <thead>
                             <tr>
-                                <td>@obj.Date.ToString("dd/MM/yyyy")</td>
-                                <td>@obj.OrdinalHours</td>
-                                <td>@obj.ExtraHours</td>
-                                <td>@obj.SickHours</td>
-                                <td>@obj.HolidayHours</td>
-                                <td>@obj.PermissionHours</td>
-                                <td>
-                                    <div class="btn-group">
-                                        @* <a asp-controller="Declaration" asp-action="Edit" asp-route-Id="@obj.Id" class="btn btn-secondary p-2 ">
-                                            <i class="bi bi-pencil-square"></i> Edit
-                                        </a> *@
-                                        <form asp-controller="Declaration" asp-action="Edit" asp-route-Id="@obj.Id" method="get">
-                                            <button type="submit" class="btn btn-secondary mx-lg-2">
-                                                <i class="bi bi-pencil-square"></i> Edit
-                                            </button>
-                                        </form>
-                                        <form asp-controller="Declaration" asp-action="Delete" asp-route-Id="@obj.Id" method="post" >
-                                            <button type="submit" class="btn btn-danger mx-lg-2">
-                                                <i class="bi bi-trash-fill"></i> Remove
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
+                                <th class="bg-secondary text-center align-middle">
+                                    <span class="material-symbols-outlined me-2">today</span>
+                                    Giorno
+                                </th>
+                                <th class="bg-secondary text-center align-middle">
+                                    <span class="material-symbols-outlined me-2">work</span>
+                                    Ordinarie
+                                </th>
+                                <th class="bg-secondary text-center align-middle">
+                                    <span class="material-symbols-outlined me-2">rocket_launch</span>
+                                    Straordinarie
+                                </th>
+                                <th class="bg-secondary text-center align-middle">
+                                    <span class="material-symbols-outlined me-2">medication_liquid</span>
+                                    Malattia
+                                </th>
+                                <th class="bg-secondary text-center align-middle">
+                                    <span class="material-symbols-outlined me-2">beach_access</span>
+                                    Ferie
+                                </th>
+                                <th class="bg-secondary text-center align-middle">
+                                    <span class="material-symbols-outlined me-2">approval_delegation</span>
+                                    Permessi
+                                </th>
+                                <th class="bg-secondary"></th>
                             </tr>
-                        }
-                    </tbody>
-                    <tfoot class="">
-                        <tr class="fw-bold bg-success">
-                            <td class="bg-secondary col-3">Month total</td>
-                            
-                            <td class="bg-secondary">@group.Sum(x => x.OrdinalHours)</td>
-                            <td class="bg-secondary">@group.Sum(x => x.ExtraHours)</td>
-                            <td class="bg-secondary">@group.Sum(x => x.SickHours)</td>
-                            <td class="bg-secondary">@group.Sum(x => x.HolidayHours)</td>
-                            <td class="bg-secondary">@group.Sum(x => x.PermissionHours)</td>
-                            <td class="bg-secondary">@group.Sum(x => x.OrdinalHours + x.ExtraHours+x.SickHours+x.HolidayHours+x.PermissionHours)</td>
-                        </tr>
-                    </tfoot>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in group.OrderBy(u => u.Date))
+                            {
+                                <tr>
+                                    <td>@obj.Date.ToString("dd/MM/yyyy")</td>
+                                    <td>@obj.OrdinalHours</td>
+                                    <td>@obj.ExtraHours</td>
+                                    <td>@obj.SickHours</td>
+                                    <td>@obj.HolidayHours</td>
+                                    <td>@obj.PermissionHours</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <form asp-controller="Declaration" asp-action="Edit" asp-route-Id="@obj.Id" method="get">
+                                                <button type="submit" class="btn btn-secondary mx-lg-2">
+                                                    <i class="bi bi-pencil-square"></i> Aggiorna
+                                                </button>
+                                            </form>
+                                            <form asp-controller="Declaration" asp-action="Delete" asp-route-Id="@obj.Id" method="post">
+                                                <button type="submit" class="btn btn-danger mx-lg-2">
+                                                    <i class="bi bi-trash-fill"></i> Elimina
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot class="">
+                            <tr class="fw-bold bg-success">
+                                <td class="bg-secondary col-3">Resoconto Mensile</td>
+
+                                <td class="bg-secondary">@group.Sum(x => x.OrdinalHours)</td>
+                                <td class="bg-secondary">@group.Sum(x => x.ExtraHours)</td>
+                                <td class="bg-secondary">@group.Sum(x => x.SickHours)</td>
+                                <td class="bg-secondary">@group.Sum(x => x.HolidayHours)</td>
+                                <td class="bg-secondary">@group.Sum(x => x.PermissionHours)</td>
+                                <td class="bg-secondary">@group.Sum(x => x.OrdinalHours + x.ExtraHours + x.SickHours + x.HolidayHours + x.PermissionHours)</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         }
     </div>
@@ -127,18 +153,124 @@ else
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Declaration Date</th>
-                <th>Ordinal Hours</th>
-                <th>Extra Hours</th>
-                <th>Sick Hours</th>
-                <th>Holiday Hours</th>
-                <th>Permission Hours</th>
+                <th class="bg-secondary text-center align-middle">
+                    <span class="material-symbols-outlined me-2">today</span>
+                    Giorno
+                </th>
+                <th class="bg-secondary text-center align-middle">
+                    <span class="material-symbols-outlined me-2">work</span>
+                    Ordinarie
+                </th>
+                <th class="bg-secondary text-center align-middle">
+                    <span class="material-symbols-outlined me-2">rocket_launch</span>
+                    Straordinarie
+                </th>
+                <th class="bg-secondary text-center align-middle">
+                    <span class="material-symbols-outlined me-2">medication_liquid</span>
+                    Malattia
+                </th>
+                <th class="bg-secondary text-center align-middle">
+                    <span class="material-symbols-outlined me-2">beach_access</span>
+                    Ferie
+                </th>
+                <th class="bg-secondary text-center align-middle">
+                    <span class="material-symbols-outlined me-2">approval_delegation</span>
+                    Permessi
+                </th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td colspan="4">No declarations found.</td>
+                <td colspan="6" class="text-center">Nessuna timbratura trovata</td>
             </tr>
         </tbody>
     </table>
 }
+
+
+
+<script>
+    document.getElementById('open-popup-btn').addEventListener('click', () => {
+
+        let optionsHtml = '';
+
+        @* Correzione: le stringhe HTML devono essere generate lato Razor, non in C# *@
+        @if (ViewBag.Weeks != null)
+        {
+            <text>
+            optionsHtml += '<option value="">--Seleziona una settimana--</option>';
+            @foreach (WorkData.Data.GenericModels.Weeks week in ViewBag.Weeks)
+            {
+                var formattedText = $"{week.WeekNumber} - [{week.FirstWeekDay:dd/MM}-{week.LastWeekDay:dd/MM}]";
+                @:optionsHtml += `<option value="@week.WeekNumber">@Html.Raw(formattedText)</option>`;
+            }
+            </text>
+        }
+        else
+        {
+            <text>
+                optionsHtml = '<option value="">Nessuna settimana trovata</option>';
+            </text>
+        }
+
+        Swal.fire({
+            title: 'Seleziona una Settimana',
+            html: `<select id="week-select" class="swal2-select">${optionsHtml}</select>`,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Conferma',
+            cancelButtonText: 'Annulla',
+            preConfirm: () => {
+                const selectedWeek = document.getElementById('week-select').value;
+                if (!selectedWeek || selectedWeek === '') {
+                    Swal.showValidationMessage('Per favore, seleziona una settimana.');
+                    return false;
+                }
+                return selectedWeek;
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const selectedWeekNumber = result.value;
+
+                // Recupera l'array di oggetti settimane dal ViewBag
+                const weekObjects = @Html.Raw(Json.Serialize(ViewBag.Weeks));
+                // Trova l'oggetto settimana completo in base al numero di settimana selezionato
+                const weekObject = weekObjects.find(w => w.weekNumber.toString() === selectedWeekNumber);
+
+                if (!weekObject) {
+                    Swal.fire('Errore!', 'Dati della settimana non trovati.', 'error');
+                    return;
+                }
+                // Esegui la chiamata POST al controller
+                fetch('/Declaration/WeekCreate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Aggiungi qui l'header per il token di antiforgeria se necessario
+                        // 'RequestVerificationToken': document.getElementsByName('__RequestVerificationToken')[0].value
+                    },
+                    body: JSON.stringify(weekObject)
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error('Errore di rete');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire('Successo!', data.message, 'success').then(() => {
+                            // Ricarica la pagina per mostrare i dati aggiornati
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire('Errore!', data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Errore:', error);
+                    Swal.fire('Errore!', 'Non è stato possibile completare la richiesta.', 'error');
+                });
+            }
+        });
+    });
+</script>
