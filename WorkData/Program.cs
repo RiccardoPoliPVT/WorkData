@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using WorkData.Controllers;
 using WorkData.Data;
+using WorkData.Data.GenericModels;
 using WorkData.Repository;
 using WorkData.Repository.Interface;
 
@@ -14,6 +16,7 @@ builder.Services.AddDefaultIdentity<SampleUser>(options => options.SignIn.Requir
     .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddScoped<IDeclarationValidator, DeclarationValidator>();
+builder.Services.Configure<GoogleDriveSettings>(builder.Configuration.GetSection(GoogleDriveSettings.SectionName));
 
 
 var app = builder.Build();
